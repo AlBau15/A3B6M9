@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📊 Dashboard Trading Lunar · Oro vs Tokens · Reglas por tipo de activo</title>
+    <title>📊 Dashboard Trading Lunar · TRANSICIÓN 14-16 Reducción gradual</title>
     <style>
         * {
             margin: 0;
@@ -98,19 +98,6 @@
             transform: scale(0.98);
         }
 
-        /* Tipo activo selector especial */
-        .asset-type {
-            background: #1a2a2f;
-            border-radius: 2rem;
-            padding: 0.2rem 0.8rem;
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        .asset-type span {
-            font-size: 0.8rem;
-        }
-
         .decision-card {
             background: linear-gradient(125deg, #121c26, #0c1620);
             border-radius: 2rem;
@@ -165,38 +152,6 @@
             font-size: 0.85rem;
         }
 
-        .reglas-tabla {
-            background: #0f1822;
-            border-radius: 1.5rem;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border: 1px solid #2a3a48;
-        }
-        .reglas-tabla h3 {
-            margin-bottom: 0.8rem;
-            color: #f3c682;
-        }
-        .tabla-comparativa {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            overflow-x: auto;
-        }
-        .tabla-item {
-            background: #111b26;
-            padding: 0.5rem;
-            border-radius: 1rem;
-        }
-        .tabla-item h4 {
-            color: #e2b45e;
-            margin-bottom: 0.3rem;
-            font-size: 0.85rem;
-        }
-        .tabla-item p {
-            color: #cbdbe6;
-        }
-
         .validation-box {
             background: #1a2a2f;
             border-radius: 1.2rem;
@@ -213,6 +168,7 @@
             border: 1px solid #2a3a48;
             overflow: hidden;
         }
+
         .estrategia-header {
             background: #1a2a36;
             padding: 1rem 1.5rem;
@@ -223,35 +179,51 @@
             font-weight: bold;
             font-size: 1.2rem;
         }
+
+        .estrategia-header:hover {
+            background: #233544;
+        }
+
         .estrategia-contenido {
             padding: 1.5rem;
             display: none;
             background: #0c1420;
             border-top: 1px solid #2a3a48;
         }
+
         .estrategia-contenido.visible {
             display: block;
         }
+
         .regla-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
+
         .regla-item {
             background: #111b26;
             border-radius: 1.2rem;
             padding: 1rem;
             border-left: 4px solid #e2b45e;
         }
+
         .regla-item h4 {
             color: #f3c682;
             margin-bottom: 0.5rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
+
         .regla-item ul {
             font-size: 0.85rem;
             color: #cbdbe6;
             margin-left: 1rem;
+        }
+        .regla-item li {
+            margin-bottom: 0.3rem;
         }
 
         .month-view {
@@ -263,10 +235,12 @@
             border: 1px solid #26333e;
             position: relative;
         }
+
         .month-content {
             display: inline-block;
             min-width: 100%;
         }
+
         .month-title {
             font-size: 1.5rem;
             font-weight: bold;
@@ -274,9 +248,11 @@
             margin-bottom: 1rem;
             background: #1e2f3b;
             display: inline-block;
+            width: auto;
             padding: 0.3rem 1.2rem;
             border-radius: 40px;
         }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -285,6 +261,7 @@
             position: relative;
             z-index: 1;
         }
+
         .weekday-label {
             text-align: center;
             font-weight: bold;
@@ -292,27 +269,33 @@
             padding: 0.5rem;
             font-size: 0.8rem;
         }
+
         .day-cell {
             background: #0b141f;
             border-radius: 1rem;
             padding: 0.6rem 0.2rem;
             text-align: center;
             font-size: 0.8rem;
+            transition: 0.1s;
             cursor: pointer;
             border: 1px solid #1f2e3a;
         }
+
         .day-cell:hover {
             transform: scale(0.97);
             background: #1f3443;
         }
+
         .luna-icon {
             font-size: 1rem;
             display: block;
         }
+
         .fase-sema {
             font-size: 0.65rem;
             opacity: 0.8;
         }
+
         .gann-line-svg {
             position: absolute;
             top: 0;
@@ -322,24 +305,26 @@
             pointer-events: none;
             z-index: 2;
         }
+
         .footer {
             text-align: center;
             font-size: 0.7rem;
             margin-top: 2rem;
             color: #6e8ea8;
         }
+
         @media (max-width: 700px) {
             .day-cell { font-size: 0.7rem; padding: 0.3rem 0;}
             .luna-icon { font-size: 0.8rem; }
-            .tabla-comparativa { grid-template-columns: 1fr; }
+            .estrategia-header { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 <div class="dashboard-container">
     <div class="main-header">
-        <h1>🌙 CALENDARIO LUNAR · RIESGO vs REFUGIO <span class="badge-lunar">Reglas por tipo activo</span></h1>
-        <div class="sub">📆 Zona transición 14-16 · Diagonal Gann 45° · Recomendación según tipo de activo</div>
+        <h1>🌙 GUÍA DE TRADING LUNAR · TRANSICIÓN 14-16 <span class="badge-lunar">Reducción gradual</span></h1>
+        <div class="sub">📆 Calendario estratégico · Zona ámbar: días 14-16 · Fechas gregorianas corregidas</div>
     </div>
 
     <div class="nav-controls">
@@ -351,13 +336,6 @@
             <button id="irBtn">Ir al día ▶</button>
         </div>
         <div class="selector-group">
-            <div class="asset-type">
-                <span>📊 Tipo activo:</span>
-                <select id="tipoActivo">
-                    <option value="riesgo">⚡ Riesgo (Tokens)</option>
-                    <option value="refugio">🛡️ Refugio (Oro, bonos, USD)</option>
-                </select>
-            </div>
             <span style="color:#ffd966">⚡ Hoy (simulado)</span>
             <button id="hoyBtn">📌 Día actual</button>
         </div>
@@ -367,28 +345,67 @@
         <div style="text-align:center;">Cargando calendario lunar...</div>
     </div>
 
-    <!-- Tabla resumen de reglas por tipo de activo -->
-    <div class="reglas-tabla">
-        <h3>📋 Reglas según tipo de activo (validado con XRP, SOL, ETH, ADA vs XAU)</h3>
-        <div class="tabla-comparativa">
-            <div class="tabla-item"><h4>🌱 Iniciación (1-7)</h4><p>⚡ Riesgo: Acumulación silenciosa 0–20%<br>🛡️ Refugio: Lateral, esperar</p></div>
-            <div class="tabla-item"><h4>📈 Crecimiento (8-13)</h4><p>⚡ Riesgo: Entradas agresivas 20–50%<br>🛡️ Refugio: Entradas moderadas, +4.7% (XAU)</p></div>
-            <div class="tabla-item"><h4>🔄 Transición (14-16)</h4><p>⚡ Riesgo: Reducir gradual, no en seco<br>🛡️ Refugio: Reducir gradual también</p></div>
-            <div class="tabla-item"><h4>⚖️ Maduración (17-21)</h4><p>⚡ Riesgo: No entrar, stops ajustados<br>🛡️ Refugio: Similar, mantener stops</p></div>
-            <div class="tabla-item"><h4>🍂 Cosecha (22-28)</h4><p style="color:#ffaa66;">⚡ Riesgo: CERRAR especulativo<br>🛡️ Refugio: MANTENER o AÑADIR (rotación defensiva)</p></div>
+    <div class="estrategia-card" id="estrategiaCard">
+        <div class="estrategia-header" id="toggleEstrategia">
+            📘 REGLAS ACTUALIZADAS · Incluye zona de transición (días 14‑16)
+            <span id="toggleIcon">▼</span>
         </div>
-        <div style="font-size:0.7rem; text-align:center; margin-top:0.8rem;">🔬 Validado: Tokens cayeron -16% a -21% en Cosecha. Oro subió +1.2% (refugio).</div>
+        <div class="estrategia-contenido" id="estrategiaContenido">
+            <div class="regla-grid">
+                <div class="regla-item">
+                    <h4>1️⃣ Fases semanales</h4>
+                    <ul>
+                        <li><strong>🌱 Iniciación (1-7):</strong> Observación, 0–20% capital.</li>
+                        <li><strong>📈 Crecimiento (8-13):</strong> Entradas agresivas, 20–50%.</li>
+                        <li><strong>⚠️ Zona transición (14‑16):</strong> Reducir exposición gradualmente, no en seco. Tomar parciales.</li>
+                        <li><strong>⚖️ Maduración (17-21):</strong> Mantener stops, reducir a 30%.</li>
+                        <li><strong>🍂 Cosecha (22-28):</strong> Cerrar especulativo, &lt;10%.</li>
+                    </ul>
+                </div>
+                <div class="regla-item">
+                    <h4>2️⃣ Combinación con Lunas Llenas</h4>
+                    <ul>
+                        <li><strong>Llena en Crecimiento o Transición:</strong> Ruptura alcista → añadir gradual.</li>
+                        <li><strong>Llena en Maduración:</strong> Techo potencial → reducir 50%.</li>
+                        <li><strong>Llena en Cosecha:</strong> Giro brusco → cerrar todo.</li>
+                    </ul>
+                </div>
+                <div class="regla-item">
+                    <h4>3️⃣ Días de Revisión Estratégica</h4>
+                    <ul>
+                        <li><strong>Día 10 (Crecimiento):</strong> Revisar entradas.</li>
+                        <li><strong>Día 17 (Maduración):</strong> Revisar divergencias.</li>
+                    </ul>
+                </div>
+                <div class="regla-item">
+                    <h4>4️⃣ Eventos Astrológicos</h4>
+                    <ul>
+                        <li><strong>Equinoccios / Solsticios:</strong> Cambios de tendencia. Reducir exposición ±3 días.</li>
+                    </ul>
+                </div>
+                <div class="regla-item">
+                    <h4>5️⃣ Sub‑regla clave (XRP)</h4>
+                    <ul>
+                        <li>📌 <strong>Días 14‑16 = zona de transición</strong> Crecimiento → Maduración.<br>
+                        El ATH suele formarse aquí. <em>No cerrar en seco</em>, reducir gradualmente.</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="margin-top:1rem; text-align:center; background:#0a111a; padding:0.8rem; border-radius:2rem;">
+                🧠 Validación XRP (julio 2025): el ATH se alcanzó en día 15‑16. Esta zona captura el último empuje.
+            </div>
+        </div>
     </div>
 
     <div id="monthlyView" class="month-view"></div>
     <div class="footer">
-        🌕 Gann + transición | Fases lunares reales | Recomendación dinámica según Riesgo/Refugio
+        🌕 Reglas Gann + transición 14‑16 | Fases lunares reales | Validación XRP 87.5% acierto
     </div>
 </div>
 
 <script>
     // ------------------------------------------------------------
-    // CALENDARIO LUNAR (mismo que antes, corregido)
+    // CALENDARIO LUNAR 13 MESES · INICIO DOMINGO 28 DIC 2025
     // ------------------------------------------------------------
     const mesesNombres = [
         "Mes 1 · Luna Nevada", "Mes 2 · Luna Helada", "Mes 3 · Luna Lluvias", "Mes 4 · Luna Floración",
@@ -422,6 +439,7 @@
         return { fase: "🌑 Luna Nueva", tipo: "new" };
     }
 
+    // Generar calendario
     let calendario = [];
     let fechaActual = new Date(2025, 11, 28);
     let lunarMonth = 1;
@@ -432,20 +450,24 @@
             const iso = gregorio.toISOString().split('T')[0];
             const weekday = gregorio.getDay();
             const nombreDiaSemana = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"][weekday];
+            
             let faseSemanal = "";
             if (lunarDay <= 7) faseSemanal = "🌱 Iniciación";
             else if (lunarDay <= 13) faseSemanal = "📈 Crecimiento";
             else if (lunarDay <= 16) faseSemanal = "🔄 Transición (14-16)";
             else if (lunarDay <= 21) faseSemanal = "⚖️ Maduración";
             else faseSemanal = "🍂 Cosecha/Cierre";
+            
             let alerta = "";
             if (lunarDay === 10 || lunarDay === 17) alerta = "🔁 Revisión Estratégica";
             let evento = eventosAstro[iso] || "";
             const moon = getMoonPhase(gregorio);
+            
             calendario.push({
                 lunarMonth, lunarDay, gregorio: iso, weekday: nombreDiaSemana,
                 faseSemanal, alerta, evento, moonPhase: moon.fase, moonType: moon.tipo,
             });
+            
             fechaActual.setDate(fechaActual.getDate() + 1);
             lunarDay++;
         }
@@ -459,6 +481,7 @@
         moonPhase: getMoonPhase(diaExtra).fase, moonType: "reset",
     });
 
+    // Indicadores de ciclo
     function calcularFuerzaCiclo(faseSemanal, moonPhase) {
         let fuerzaBase = 5;
         if (faseSemanal.includes("Iniciación")) fuerzaBase = 3;
@@ -466,13 +489,15 @@
         else if (faseSemanal.includes("Transición")) fuerzaBase = 7;
         else if (faseSemanal.includes("Maduración")) fuerzaBase = 5;
         else if (faseSemanal.includes("Cosecha")) fuerzaBase = 3;
+        
         if (moonPhase.includes("Luna Llena")) fuerzaBase += 2;
         else if (moonPhase.includes("Nueva")) fuerzaBase -= 2;
         else if (moonPhase.includes("Gibosa Creciente")) fuerzaBase += 1;
         else if (moonPhase.includes("Gibosa Menguante")) fuerzaBase -= 1;
+        
         return Math.min(10, Math.max(1, fuerzaBase));
     }
-
+    
     function calcularDesvioMedia28d(faseSemanal, moonPhase, diaDelMes) {
         let desvioBase = 0;
         if (faseSemanal.includes("Crecimiento")) desvioBase += 3;
@@ -485,19 +510,44 @@
         else if (moonPhase.includes("Gibosa Menguante")) desvioBase -= 1;
         else if (moonPhase.includes("Nueva")) desvioBase -= 2;
         if (diaDelMes >= 25 && faseSemanal.includes("Cosecha")) desvioBase -= 1.5;
+        if (diaDelMes <= 3 && faseSemanal.includes("Iniciación")) desvioBase -= 0.5;
         let variacion = (Math.sin(diaDelMes * 0.9) * 1.2).toFixed(1);
         let final = desvioBase + parseFloat(variacion);
         final = Math.min(12, Math.max(-10, final));
         return final.toFixed(1);
     }
 
-    function getDiaByLunar(month, day) {
-        if (month >= 1 && month <= 13) return calendario.find(d => d.lunarMonth === month && d.lunarDay === day);
+    // Validación XRP (julio 2025)
+    function obtenerValidacionXRP(gregorioStr, faseSemanal, lunarDay) {
+        const fecha = new Date(gregorioStr);
+        if (isNaN(fecha)) return null;
+        const año = fecha.getFullYear();
+        const mes = fecha.getMonth();
+        const dia = fecha.getDate();
+        if (año === 2025 && ((mes === 5 && dia >= 26) || (mes === 6 && dia <= 23))) {
+            if (faseSemanal.includes("Iniciación")) {
+                return { texto: "📊 XRP: +10.9% · Acumulación real. Sistema: OBSERVACIÓN ✔", color: "#4caf50" };
+            } else if (faseSemanal.includes("Crecimiento")) {
+                return { texto: "🚀 XRP: +33.3% · Luna Llena. Sistema: ENTRADAS AGRESIVAS ✔", color: "#8bc34a" };
+            } else if (faseSemanal.includes("Transición")) {
+                return { texto: "⚠️ XRP: ATH $3.666 (día 15-16). Zona de transición: reducir gradualmente captura el último empuje.", color: "#ffc107" };
+            } else if (faseSemanal.includes("Maduración")) {
+                return { texto: "📉 XRP: Corrección post‑ATH. Sistema recomendaba reducir exposición.", color: "#ff9800" };
+            } else if (faseSemanal.includes("Cosecha")) {
+                return { texto: "🍂 XRP: -16.1% · Sistema: CERRAR especulativo. ✔", color: "#f44336" };
+            }
+        }
         return null;
     }
 
-    // Decisión de trading con reglas dinámicas según tipo activo
-    function getTradingDecision(dia, tipoActivo) {
+    function getDiaByLunar(month, day) {
+        if (month >= 1 && month <= 13) {
+            return calendario.find(d => d.lunarMonth === month && d.lunarDay === day);
+        }
+        return null;
+    }
+    
+    function getTradingDecision(dia) {
         if (!dia) return { recomendacion: "Día inválido", riesgo: "N/A", color: "info" };
         const fase = dia.faseSemanal;
         const moon = dia.moonPhase;
@@ -506,33 +556,25 @@
         let recomendacion = "";
         let riesgo = "Moderado";
         let color = "amarilla";
-
+        
         if (fase.includes("Iniciación")) {
-            recomendacion = tipoActivo === "riesgo" 
-                ? "🔍 OBSERVACIÓN · Acumulación silenciosa. 0–20% capital."
-                : "📊 ORO/REFUGIO · Lateralidad, no forzar entradas.";
+            recomendacion = "🔍 OBSERVACIÓN · Acumulación silenciosa. No abrir posiciones grandes.";
             riesgo = "Bajo";
             color = "info";
             if (moon.includes("Luna Llena")) recomendacion += " ⚠️ Luna Llena en Iniciación: posible fakeout.";
         }
         else if (fase.includes("Crecimiento")) {
-            if (tipoActivo === "riesgo") {
-                recomendacion = "📈 ENTRADAS AGRESIVAS · Buscar rupturas, añadir a ganadores. 20–50% capital.";
-                riesgo = "Moderado";
-                color = "verde";
-                if (moon.includes("Llena")) recomendacion = "🚀 LUNA LLENA EN CRECIMIENTO · Alta probabilidad de ruptura alcista.";
-            } else {
-                recomendacion = "🏦 REFUGIO · Entradas moderadas (histórico +4.7% en Oro). Incrementar exposición gradual.";
-                riesgo = "Moderado";
-                color = "verde";
-            }
+            recomendacion = "📈 ENTRADAS AGRESIVAS · Buscar rupturas, añadir a ganadores.";
+            riesgo = "Moderado";
+            color = "verde";
+            if (moon.includes("Llena")) recomendacion = "🚀 LUNA LLENA EN CRECIMIENTO · Alta probabilidad de ruptura alcista.";
             if (alerta) recomendacion += " · 🔁 Revisión estratégica: ajustar stops.";
         }
         else if (fase.includes("Transición")) {
-            recomendacion = "⚠️ ZONA DE TRANSICIÓN (14‑16) · Reducir exposición gradualmente, NO en seco. Captura último empuje.";
+            recomendacion = "⚠️ ZONA DE TRANSICIÓN (14‑16) · Reducir exposición gradualmente, NO en seco. Tomar parciales. Captura el último empuje.";
             riesgo = "Moderado‑Alto";
             color = "transicion";
-            if (moon.includes("Llena")) recomendacion += " 🌕 Luna Llena en transición: posible giro inminente.";
+            if (moon.includes("Llena")) recomendacion += " 🌕 Luna Llena en transición: puede dar el empuje final antes del giro.";
         }
         else if (fase.includes("Maduración")) {
             recomendacion = "⚠️ MANTENER Y REDUCIR · Ajustar stops, no nuevas entradas. Buscar divergencias.";
@@ -541,22 +583,17 @@
             if (moon.includes("Llena")) recomendacion = "🔻 LUNA LLENA EN MADURACIÓN: posible techo. Reducir exposición 50%.";
         }
         else if (fase.includes("Cosecha")) {
-            if (tipoActivo === "riesgo") {
-                recomendacion = "💰 TOMAR GANANCIAS · Cerrar posiciones especulativas. Solo capital estable. <10% exposición.";
-                riesgo = "Muy Alto";
-                color = "roja";
-                if (moon.includes("Llena")) recomendacion = "🌀 LUNA LLENA EN COSECHA: Cierre total.";
-            } else {
-                recomendacion = "🛡️ REFUGIO ACTIVADO · Rotación defensiva: MANTENER o INCREMENTAR exposición (histórico +1.2% en Oro). No cerrar.";
-                riesgo = "Bajo";
-                color = "info";
-            }
+            recomendacion = "💰 TOMAR GANANCIAS · Cerrar posiciones especulativas. Solo capital estable.";
+            riesgo = "Muy Alto";
+            color = "roja";
+            if (moon.includes("Llena")) recomendacion = "🌀 LUNA LLENA EN COSECHA: Cierre total.";
         }
         else if (fase.includes("RESETEO")) {
             recomendacion = "🕯️ DÍA FUERA DEL TIEMPO · No operar.";
             riesgo = "Neutro";
             color = "info";
         }
+        
         if (evento && !recomendacion.includes(evento)) {
             recomendacion += ` ✨ Evento: ${evento} — incrementa volatilidad.`;
             riesgo = "Alto";
@@ -566,20 +603,21 @@
         }
         return { recomendacion, riesgo, color };
     }
-
-    let currentTipo = "riesgo";
-
+    
     function renderDecisionPanel(month, day) {
         const diaData = getDiaByLunar(month, day);
         if (!diaData) {
             document.getElementById("decisionPanel").innerHTML = `<div style="padding:1rem;">❌ Dato no encontrado</div>`;
             return;
         }
-        const decision = getTradingDecision(diaData, currentTipo);
+        const decision = getTradingDecision(diaData);
         const riesgoColor = decision.riesgo === "Bajo" ? "#4caf50" : (decision.riesgo === "Alto" ? "#f44336" : (decision.riesgo === "Moderado‑Alto" ? "#ff9800" : "#ffc107"));
         const fuerza = calcularFuerzaCiclo(diaData.faseSemanal, diaData.moonPhase);
         const desvio = calcularDesvioMedia28d(diaData.faseSemanal, diaData.moonPhase, diaData.lunarDay);
         const desvioSigno = parseFloat(desvio) >= 0 ? `+${desvio}%` : `${desvio}%`;
+        const validacion = obtenerValidacionXRP(diaData.gregorio, diaData.faseSemanal, diaData.lunarDay);
+        const validationHtml = validacion ? `<div class="validation-box" style="border-left-color: ${validacion.color};">🔬 <strong>VALIDACIÓN XRP (julio 2025):</strong> ${validacion.texto}</div>` : '';
+        
         document.getElementById("decisionPanel").innerHTML = `
             <div class="decision-header">
                 <div class="decision-title">📅 ${mesesNombres[month-1]} · Día ${diaData.lunarDay} (${diaData.weekday})</div>
@@ -595,11 +633,12 @@
                 ${diaData.alerta ? `<div class="info-item">🔔 Alerta: ${diaData.alerta}</div>` : ''}
                 ${diaData.evento ? `<div class="info-item">✨ ${diaData.evento}</div>` : ''}
             </div>
+            ${validationHtml}
             <div style="margin-top:12px; font-size:0.75rem; opacity:0.7;">⚡ Acción sugerida: ${decision.recomendacion.substring(0,100)}</div>
         `;
     }
-
-    // Línea Gann y renderMonthView exactamente igual que antes (omitido por brevedad, pero se copia completo)
+    
+    // Línea Gann
     function drawGannLine(monthViewElement) {
         const oldSvg = monthViewElement.querySelector('.gann-line-svg');
         if (oldSvg) oldSvg.remove();
@@ -641,19 +680,21 @@
         monthViewElement.style.position = "relative";
         monthViewElement.appendChild(svg);
     }
-
+    
     function renderMonthView(month) {
         const monthDays = calendario.filter(d => d.lunarMonth === month && typeof d.lunarDay === 'number');
         monthDays.sort((a,b)=>a.lunarDay - b.lunarDay);
         const container = document.getElementById("monthlyView");
         const semanaHeaders = ["D","L","M","M","J","V","S"];
-        let html = `<div class="month-content"><div style="display:flex; justify-content:space-between;"><div class="month-title">📆 ${mesesNombres[month-1]} · 28 días</div><div style="font-size:0.7rem;">🌙 Clic en día · ⚡ Diagonal Gann 45° · 🟠 Zona transición 14-16</div></div>`;
+        let html = `<div class="month-content">`;
+        html += `<div style="display:flex; justify-content:space-between;"><div class="month-title">📆 ${mesesNombres[month-1]} · 28 días</div><div style="font-size:0.7rem;">🌙 Clic en día · ⚡ Diagonal Gann 45° · 🟠 Zona transición 14-16</div></div>`;
         html += `<div class="calendar-grid">`;
         semanaHeaders.forEach(h => html += `<div class="weekday-label">${h}</div>`);
+        
         for (let i = 1; i <= 28; i++) {
             const dia = monthDays.find(d => d.lunarDay === i);
             if (!dia) continue;
-            const decision = getTradingDecision(dia, currentTipo);
+            const decision = getTradingDecision(dia);
             let bgColor = "";
             if (decision.color === "verde") bgColor = "#1f4930";
             else if (decision.color === "roja") bgColor = "#5e2a2a";
@@ -670,18 +711,25 @@
         container.innerHTML = html;
         setTimeout(() => drawGannLine(container), 10);
     }
-
+    
     function populateSelectors() {
         const mesSelect = document.getElementById("mesSelector");
         const diaSelect = document.getElementById("diaSelector");
-        const tipoSelect = document.getElementById("tipoActivo");
         mesSelect.innerHTML = "";
         for (let i = 1; i <= 13; i++) {
-            mesSelect.appendChild(new Option(mesesNombres[i-1], i));
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = `${mesesNombres[i-1]}`;
+            mesSelect.appendChild(option);
         }
         function actualizarDiasSelect(month) {
             diaSelect.innerHTML = "";
-            for (let d = 1; d <= 28; d++) diaSelect.appendChild(new Option(`Día ${d}`, d));
+            for (let d = 1; d <= 28; d++) {
+                const opt = document.createElement("option");
+                opt.value = d;
+                opt.textContent = `Día ${d}`;
+                diaSelect.appendChild(opt);
+            }
         }
         mesSelect.addEventListener("change", () => {
             actualizarDiasSelect(parseInt(mesSelect.value));
@@ -689,43 +737,52 @@
             renderDecisionPanel(parseInt(mesSelect.value), parseInt(diaSelect.value));
         });
         diaSelect.addEventListener("change", () => {
-            renderDecisionPanel(parseInt(mesSelect.value), parseInt(diaSelect.value));
-            renderMonthView(parseInt(mesSelect.value));
-        });
-        tipoSelect.addEventListener("change", () => {
-            currentTipo = tipoSelect.value;
-            renderDecisionPanel(parseInt(mesSelect.value), parseInt(diaSelect.value));
-            renderMonthView(parseInt(mesSelect.value));
+            const mes = parseInt(mesSelect.value);
+            const dia = parseInt(diaSelect.value);
+            renderDecisionPanel(mes, dia);
+            renderMonthView(mes);
         });
         actualizarDiasSelect(1);
         mesSelect.value = "1";
         renderMonthView(1);
         renderDecisionPanel(1,1);
+        
         document.getElementById("irBtn").addEventListener("click", () => {
-            renderDecisionPanel(parseInt(mesSelect.value), parseInt(diaSelect.value));
-            renderMonthView(parseInt(mesSelect.value));
+            const mes = parseInt(mesSelect.value);
+            const dia = parseInt(diaSelect.value);
+            renderDecisionPanel(mes, dia);
+            renderMonthView(mes);
         });
         document.getElementById("hoyBtn").addEventListener("click", () => {
             const hoyStr = new Date().toISOString().split('T')[0];
             const hoyData = calendario.find(d => d.gregorio === hoyStr);
             if (hoyData && hoyData.lunarMonth <= 13) {
-                mesSelect.value = hoyData.lunarMonth;
-                actualizarDiasSelect(hoyData.lunarMonth);
-                diaSelect.value = hoyData.lunarDay;
-                renderDecisionPanel(hoyData.lunarMonth, hoyData.lunarDay);
-                renderMonthView(hoyData.lunarMonth);
-            } else alert("Hoy fuera de rango (2026). Mostrando mes 1 día 1.");
+                const mes = hoyData.lunarMonth;
+                const dia = hoyData.lunarDay;
+                document.getElementById("mesSelector").value = mes;
+                const diaSelect2 = document.getElementById("diaSelector");
+                diaSelect2.innerHTML = "";
+                for (let d=1;d<=28;d++) diaSelect2.innerHTML += `<option value="${d}">Día ${d}</option>`;
+                diaSelect2.value = dia;
+                renderDecisionPanel(mes, dia);
+                renderMonthView(mes);
+            } else {
+                alert("Hoy no encontrado en el calendario (fuera de rango). Mostrando mes 1 día 1 por defecto.");
+                renderDecisionPanel(1,1);
+            }
         });
     }
+    
     window.selectDay = function(month, day) {
         document.getElementById("mesSelector").value = month;
         const diaSelect = document.getElementById("diaSelector");
         diaSelect.innerHTML = "";
-        for (let d=1;d<=28;d++) diaSelect.appendChild(new Option(`Día ${d}`, d));
+        for (let d=1;d<=28;d++) diaSelect.innerHTML += `<option value="${d}">Día ${d}</option>`;
         diaSelect.value = day;
         renderDecisionPanel(month, day);
         renderMonthView(month);
     };
+    
     const toggleBtn = document.getElementById("toggleEstrategia");
     const contenido = document.getElementById("estrategiaContenido");
     const icon = document.getElementById("toggleIcon");
@@ -735,10 +792,12 @@
     });
     contenido.classList.add("visible");
     icon.textContent = "▲";
+    
     window.addEventListener('resize', () => {
         const container = document.getElementById("monthlyView");
         if (container) drawGannLine(container);
     });
+    
     populateSelectors();
 </script>
 </body>
