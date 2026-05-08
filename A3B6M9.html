@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📊 Dashboard Trading Lunar · Zona de Transición (días 14-16)</title>
+    <title>📊 Dashboard Trading Lunar · TRANSICIÓN 14-16 Reducción gradual</title>
     <style>
         * {
             margin: 0;
@@ -180,6 +180,10 @@
             font-size: 1.2rem;
         }
 
+        .estrategia-header:hover {
+            background: #233544;
+        }
+
         .estrategia-contenido {
             padding: 1.5rem;
             display: none;
@@ -320,7 +324,7 @@
 <div class="dashboard-container">
     <div class="main-header">
         <h1>🌙 GUÍA DE TRADING LUNAR · TRANSICIÓN 14-16 <span class="badge-lunar">Reducción gradual</span></h1>
-        <div class="sub">📆 Calendario estratégico · Zona ámbar: días 14-16 (reducir exposición gradualmente)</div>
+        <div class="sub">📆 Calendario estratégico · Zona ámbar: días 14-16 · Fechas gregorianas corregidas</div>
     </div>
 
     <div class="nav-controls">
@@ -447,7 +451,6 @@
             const weekday = gregorio.getDay();
             const nombreDiaSemana = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"][weekday];
             
-            // Nueva lógica de fase semanal con zona de transición
             let faseSemanal = "";
             if (lunarDay <= 7) faseSemanal = "🌱 Iniciación";
             else if (lunarDay <= 13) faseSemanal = "📈 Crecimiento";
@@ -612,7 +615,7 @@
         const fuerza = calcularFuerzaCiclo(diaData.faseSemanal, diaData.moonPhase);
         const desvio = calcularDesvioMedia28d(diaData.faseSemanal, diaData.moonPhase, diaData.lunarDay);
         const desvioSigno = parseFloat(desvio) >= 0 ? `+${desvio}%` : `${desvio}%`;
-        const validacion = obtenerValidacionXRP(diaData.gregorico, diaData.faseSemanal, diaData.lunarDay);
+        const validacion = obtenerValidacionXRP(diaData.gregorio, diaData.faseSemanal, diaData.lunarDay);
         const validationHtml = validacion ? `<div class="validation-box" style="border-left-color: ${validacion.color};">🔬 <strong>VALIDACIÓN XRP (julio 2025):</strong> ${validacion.texto}</div>` : '';
         
         document.getElementById("decisionPanel").innerHTML = `
@@ -624,7 +627,7 @@
             <div class="info-grid">
                 <div class="info-item">🌙 Fase semanal: ${diaData.faseSemanal}</div>
                 <div class="info-item">🌓 Luna real: ${diaData.moonPhase}</div>
-                <div class="info-item">📆 Gregoriano: ${diaData.gregorico}</div>
+                <div class="info-item">📆 Gregoriano: ${diaData.gregorio}</div>
                 <div class="info-item">💪 Fuerza ciclo: ${fuerza}/10</div>
                 <div class="info-item">📊 vs Media 28d: ${desvioSigno}</div>
                 ${diaData.alerta ? `<div class="info-item">🔔 Alerta: ${diaData.alerta}</div>` : ''}
@@ -752,7 +755,7 @@
         });
         document.getElementById("hoyBtn").addEventListener("click", () => {
             const hoyStr = new Date().toISOString().split('T')[0];
-            const hoyData = calendario.find(d => d.gregorico === hoyStr);
+            const hoyData = calendario.find(d => d.gregorio === hoyStr);
             if (hoyData && hoyData.lunarMonth <= 13) {
                 const mes = hoyData.lunarMonth;
                 const dia = hoyData.lunarDay;
@@ -764,7 +767,7 @@
                 renderDecisionPanel(mes, dia);
                 renderMonthView(mes);
             } else {
-                alert("Demo: Hoy no encontrado, mostrando mes 1 día 1");
+                alert("Hoy no encontrado en el calendario (fuera de rango). Mostrando mes 1 día 1 por defecto.");
                 renderDecisionPanel(1,1);
             }
         });
